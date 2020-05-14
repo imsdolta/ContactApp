@@ -1,0 +1,22 @@
+
+body{
+	background: linear-gradient(45deg, indigo,transparent);
+}
+
+
+header {
+	    margin: 30px;
+    padding: 15%;
+    font-size: -webkit-xxx-large;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+main{
+	padding: 30%;
+}
+
+footer{
+	padding: 20%;
+	align-content: center;
+}
