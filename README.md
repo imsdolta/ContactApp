@@ -29,7 +29,7 @@ lite-server
 
 ## 2. server 
 
-make sure you have [node.js](nodejs.orghttps://nodejs.org) installed before running following commands
+make sure you have [node.js](https://nodejs.org) installed before running following commands
 
 ```bash 
 cd server 
