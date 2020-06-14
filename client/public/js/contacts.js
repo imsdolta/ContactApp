@@ -1,12 +1,10 @@
-const API_URL = 'API_URL_GOES_HERE';
+const API_URL = 'http://localhost:3030';
 
 // select elements 
 const contactDiv = document.getElementById("contacts");
 const showBtn= document.getElementById("edit");
 const userCard = document.getElementById("userCard");
 const contact = document.getElementById("contact");
-
-
 
 window.addEventListener('load', ()=> {
 	getContacts(API_URL+'/contacts/find');
@@ -22,7 +20,8 @@ const getContacts = (url)=>{
 
 
 const Display = (data)=>{
-	data.contact.forEach(item=>{
+console.log(123);
+data.contact.forEach(item=>{
 		createDiv(item);       // create a div for each fetched item from db
 	})
 }
@@ -72,7 +71,7 @@ const card = (data)=>
 {	
 
 	const item = data.contact[0];
-	console.log(item);
+	if(!item.URL)  item.URL = './icons/head.jpg';
 	 const div1 = document.createElement('div');
 
 	div1.innerHTML = `
@@ -81,7 +80,7 @@ const card = (data)=>
 		<div class="card">
 		<div class="card-image">
 	    <figure class="image is-4by3">
-	     	 <img src="head.jpg"/> 
+	     	 <img src=${item.URL} /> 
 		</figure>
   	</div>
 	  <div class="card-content">
@@ -242,7 +241,6 @@ console.log('after fetch...');
 }
 
 const  validate = (name, number, email, catagory) =>{
-    console.log('isnide validate,....');
 	if(!name && !number && !email && !catagory)
 	{
 		console.log('All fields must be entered');
