@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 const mongoose = require('mongoose'); 
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -11,13 +12,7 @@ const app = express();
 const port = 3030
 
 
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
+app.use(morgan('tiny'));
 app.use(cors());
 
 
@@ -54,28 +49,28 @@ app.use(express.json());
 
 
 // Express Session Middleware
-app.use(
-  session({
-    secret: 'keyboard cat',
-    resave: true,
-    saveUninitialized: true
-  })
-);  
+// app.use(
+//   session({
+//     secret: 'keyboard cat',
+//     resave: true,
+//     saveUninitialized: true
+//   })
+// );  
 
 // Express Messages Middleware
-app.use(require('connect-flash')());
-app.use(function(req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
-});
+// app.use(require('connect-flash')());
+// app.use(function(req, res, next) {
+//   res.locals.messages = require('express-messages')(req, res);
+//   next();
+// });
 
 
-app.get('/*', function(req, res, next) {
-  setTimeout(function() {
-    req.session.flash = [];
-  }, 3000);
-  next();
-});
+// app.get('/*', function(req, res, next) {
+//   setTimeout(function() {
+//     req.session.flash = [];
+//   }, 3000);
+//   next();
+// });
 
 app.get('/',(req, res)=>{
   res.json({

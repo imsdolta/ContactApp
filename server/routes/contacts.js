@@ -20,24 +20,29 @@ router.post('/Add',
     check('Name').isLength({ min: 2 }).isLength({ max :20}),
     check('number').isLength({ max: 10 }).isNumeric(),
     check('Email').isEmail(),
-    check('Catagory')
+    check('Catagory'),
+    check('URL')
   ],
   (req, res, next)=> { 
-     
+    
   const errors = validationResult(req);
   if (errors.isEmpty()) {
-    let contact = new contacts();
-    contact.Name = req.body.Name;
-    contact.number = req.body.number;
-    contact.Email = req.body.Email;
-    contact.Catagory = req.body.Catagory;
 
-    console.log('before saving ', req.body.number);
+    let contact = new contacts({
+        Name :req.query.Name,
+        number : req.query.number,
+        Email:req.query.Email,
+        Catagory:req.query.Catagory,
+        URL:req.query.URL
+    });
+   
+
+    console.log('before saving ',contact);
 
     contact.save((err)=>{
         if(err) return handleError(err);
         else{
-          console.log('Saved');
+          res.status(200);
         }
     });
   }
