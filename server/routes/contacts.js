@@ -24,16 +24,17 @@ router.post('/Add',
     check('URL')
   ],
   (req, res, next)=> { 
-    
+  
+    console.log(req.body);
   const errors = validationResult(req);
   if (errors.isEmpty()) {
 
     let contact = new contacts({
-        Name :req.query.Name,
-        number : req.query.number,
-        Email:req.query.Email,
-        Catagory:req.query.Catagory,
-        URL:req.query.URL
+        Name :req.body.Name,
+        number : req.body.number,
+        Email:req.body.Email,
+        Catagory:req.body.Catagory,
+        URL:req.body.URL
     });
    
 
@@ -97,8 +98,8 @@ router.get('/delete/:id', (req, res)=> {
 
 //  /contacts/edit/:id route
 router.get('/edit/:id', (req, res) => {
-  let query = {_id : req.params.id};
-  contacts.findById(query, (err, contact)=> {
+  let body = {_id : req.params.id};
+  contacts.findById(body, (err, contact)=> {
     if(err) return handleError(err);
     res.render('edit', {
       contact: contact
