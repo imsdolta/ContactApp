@@ -1,5 +1,5 @@
 // This is place for all routes such as Add, delete, edit and so on...
-const { userValidationRules, validate } = require('../validators/validator.js')
+// const { userValidationRules, validate } = require('../validators/validator.js')  
 const { check, validationResult } = require('express-validator')
 
 const express = require('express');
@@ -9,7 +9,7 @@ const contacts = require('../Models/Phone')
 // /contacts route
 router.get('/', (req, res)=>{
   res.json({
-    message:"Welcome to the contacts route"
+    message:"This is contacts route"
   })
 });
 
@@ -26,33 +26,30 @@ router.post('/Add',
   (req, res, next)=> { 
   
     console.log(req.body);
-  const errors = validationResult(req);
-  if (errors.isEmpty()) {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+      let contact = new contacts({
+          Name :req.body.Name,
+          number : req.body.number,
+          Email:req.body.Email,
+          Catagory:req.body.Catagory,
+          URL:req.body.URL
+      });
+  
+      console.log('before saving ',contact);
 
-    let contact = new contacts({
-        Name :req.body.Name,
-        number : req.body.number,
-        Email:req.body.Email,
-        Catagory:req.body.Catagory,
-        URL:req.body.URL
-    });
-   
-
-    console.log('before saving ',contact);
-
-    contact.save((err)=>{
-        if(err) return handleError(err);
-        else{
-          res.status(200);
-        }
-    });
-  }
-
-
+      contact.save((err)=>{
+          if(err) next();
+          else{
+            res.status(200);
+          }
+      });
+    
+  
   const extractedErrors = []
   errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
   return res.status(422).json({  errors: extractedErrors, })
-
+    }
 });
 
 
@@ -71,7 +68,7 @@ router.get('/find',function(req, res) {
 router.get('/find/:id',function(req, res) {
  
   const _id = {_id : req.params.id};   // must be an object while using find
-  contacts.find(_id, function(err, contact) {
+  contacts.find(_id, (err, contact)=> {
       if(err) return handleError(err);
       res.json({
         contact
@@ -81,35 +78,46 @@ router.get('/find/:id',function(req, res) {
 
 //  /contacts/delete/:id route
 router.get('/delete/:id', (req, res)=> {
-  const _id = {_id : req.params.id};
-  contacts.deleteOne(_id, (err)=> {
-      if (err) {
-         return handleError(err);
-      }
-      else
-      res.json({
-        message :"Contact Deleted"
-      }); 
-    console.log("deleted");
-      
-  });
+  const id = {_id : req.params.id};
+  contacts.deleteOne(id, (err)=> {
+  if (err) {
+      return handleError(err);
+  } else {  
+   res.json({ message :"Contact Deleted"});
+  }
 });
-
+});
+ 
+ 
 
 //  /contacts/edit/:id route
 router.get('/edit/:id', (req, res) => {
-  let body = {_id : req.params.id};
-  contacts.findById(body, (err, contact)=> {
-    if(err) return handleError(err);
-    res.render('edit', {
-      contact: contact
-    });
+  let id = {_id : req.params.id};
+  contacts.findById(id, (err, contact)=> {
+    console.log(contact);
+    if(err) {
+      res.json({"error":"not found"});
+      handleError(err);
+    } else {
+      contacts.deleteOne(id, (err)=> {
+        if (err) {
+            return handleError(err);
+        } else {  
+            res.json(contact);
+        }
+      });
+    }
   });
 });
 
 
 //handle error
-const handleError = (err) =>console.log(err);
+const handleError = (err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err)
+  }
+  res.status(500).send('error', error);
+}
 
 
 module.exports = router;
