@@ -38,14 +38,16 @@ node App.js
 ```
 todos:
 Make the API cleaner 
+```bash
  from contacts/Add  to  contacts  [POST to /contacts insted of /contacts/Add]
  from contacts/find to  contacts  [GET req to /contacts]
  from contacts/find/id to  contacts  [GET req to /contacts/:id]
  from contacts/delete/id to   [DELETE req to   /contacts/:id ]
-
+```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
