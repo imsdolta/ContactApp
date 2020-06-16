@@ -30,8 +30,8 @@ const createDiv = (item)=>{
 
 	const div = document.createElement('div');
  
-	div.innerHTML = `<div class="card">
-	  <div class="card-content">
+	div.innerHTML = `<div class="card ">
+	  <div class="card-content mt-4">
 	    <p class="title">  <i class="fa fa-user" ></i> ${item.Name}  </p>
 	    <p class="subtitle"> <i class="fa fa-phone" ></i>
 	      ${item.number}
@@ -50,7 +50,8 @@ const createDiv = (item)=>{
 	      </span>
 	    </p>
 	  </footer>
-	</div>`;
+	</div>
+	<br><br>`;
 
 	contactDiv.appendChild(div);
 	 
@@ -109,7 +110,7 @@ const card = (data)=>
 	    </p>
 	    <p class="card-footer-item">
 	      <span>
-	      	<button ype="button" class="button is-success is-rounded" onclick="edit(value);" value="${item._id}"> Edit </button>
+	      	<button type="button" class="button is-success is-rounded" onclick="edit(value);" value="${item._id}"> Edit </button>
 	      </span>
 	    </p>
 	  </footer>
@@ -130,7 +131,7 @@ const remove = (id) =>             // delete a contact
 		<div class="columns is-centered">
 			<div class="column is-half ">
 			<span>
-      			<button ype="button" class="button is-success is-rounded  href="/contacts.html" > Show All Contacts </button>
+      			<a class="button is-success is-rounded"  href="/contacts.html" > Show All Contacts </a>
       		</span>
 			</div>
 		</div>
