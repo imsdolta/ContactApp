@@ -1,7 +1,5 @@
 // This is place for all routes such as Add, delete, edit and so on...
-// const { userValidationRules, validate } = require('../validators/validator.js')  
 const { check, validationResult } = require('express-validator')
-
 const express = require('express');
 const router = express.Router();
 const contacts = require('../Models/Phone')

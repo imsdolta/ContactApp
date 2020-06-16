@@ -3,10 +3,6 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose'); 
 const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
-const session = require('express-session');
-const path = require('path');
-const contacts = require('./Models/Phone');
 require('dotenv').config();
 const app = express();
 const port = 3030
