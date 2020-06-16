@@ -58,9 +58,9 @@ const createDiv = (item)=>{
 
 const showCard = (id)=>{        // Expand to a bigger card when button is clicked
 
-	 contactDiv.style.display = 'none';
+	contactDiv.style.display = 'none';
 
-	 fetch(API_URL+'/contacts/find/'+id)
+	fetch(API_URL+'/contacts/find/'+id)
 	.then(response=> response.json())
 	.then(data=>  card(data))
 	.catch(err=> console.log(err));
@@ -83,8 +83,8 @@ const card = (data)=>
 	     	 <img src=${item.URL} /> 
 		</figure>
   	</div>
+	
 	  <div class="card-content">
-
 	    <p class="title">  <i class="fa fa-user" ></i> ${item.Name}  </p>
 	    <p class="subtitle"> <i class="fa fa-phone" ></i>
 	      ${item.number}
@@ -112,7 +112,6 @@ const card = (data)=>
 	      	<button ype="button" class="button is-success is-rounded" onclick="edit(value);" value="${item._id}"> Edit </button>
 	      </span>
 	    </p>
-	    
 	  </footer>
 	</div>
 	</div>
@@ -126,12 +125,12 @@ const remove = (id) =>             // delete a contact
 	.then(response=> {
 		if(response.status == 200)
 		userCard.style.display = 'none';
-		document.getElementById('back').innerHTML = `
-		<div class="container">
+		document.getElementById('back').innerHTML =
+		`<div class="container">
 		<div class="columns is-centered">
 			<div class="column is-half ">
 			<span>
-      			<button ype="button" class="button is-success is-rounded  "href="/contacts.html" > Show All Contacts </button>
+      			<button ype="button" class="button is-success is-rounded  href="/contacts.html" > Show All Contacts </button>
       		</span>
 			</div>
 		</div>
@@ -143,19 +142,18 @@ const remove = (id) =>             // delete a contact
 
 const edit = (id)=>{                     // Edit info of a contact
 	 userCard.style.display='none';
-	 fetch(API_URL+'/contacts/find/'+id)
+	 fetch(API_URL+'/contacts/edit/'+id)
 	.then(response=> response.json())
-	.then(data=> change(data))
-	.catch(err=> console.log(err));
+	.then(data=> change(data));
 
 }
 
 const change = (data) => {               // helper function of edit to display form with existing contact info
-	const item = data.contact[0];
-		console.log(item);
-		const edit = document.getElementById("change");
-		const editDiv = document.createElement('div'); 
-		editDiv.innerHTML=`<form class="contact-form" id="contact-form"> 
+	console.log(data);
+	const item = data;
+	const edit = document.getElementById("change");
+	const editDiv = document.createElement('div'); 
+	editDiv.innerHTML=`<form class="contact-form" id="contact-form"> 
 	<div class="field">
 	  <label class="label">Name</label>
 	  <div class="control">
@@ -183,7 +181,10 @@ const change = (data) => {               // helper function of edit to display f
 	    </span>
 	  </div>
 	</div>
-
+	<div class="field">
+		<label class="label">Image URL</label>
+		  <input class="input is-success" type="URL" name="URL" value="${item.URL}"placeholder="Enter URL">
+	</div>
 	<div class="field">
 	  <label class="label" >Category</label>
 	  <div class="control">
@@ -201,30 +202,32 @@ const change = (data) => {               // helper function of edit to display f
 
 	<div class="field is-grouped">
 	  <div class="control">
-	    <button class="button is-link" onclick="saveNewData(${item._id});" type="submit">Submit</button>
+	    <button class="button is-link" onclick="saveNewData();" type="submit">Submit</button>
 	  </div>
 	</div>
 	</form>`;
-	console.log('changing id..');
+	//alert('changing id', item._id);
 	edit.appendChild(editDiv);
 
 }
 
-const saveNewData = (id) => {              
-const formElem = document.getElementById('contact-form');
-const formData = new FormData(formElem);
+const saveNewData = () => {       
+	const formElem = document.getElementById('contact-form');
+	const formData = new FormData(formElem);
 	
 	var Name = formData.get('name');
 	var number = formData.get('number');
 	var Email = formData.get('email');
 	var Catagory = formData.get('catagory');
-
-	validate(Name,number,Email,Catagory);     // validate form data
+	var URL = formData.get('URL');
+	
+	validate(Name,number,Email,Catagory,URL);     // validate form data
 
 	var  sendData = {
-		Name , number, Email,Catagory
+		Name , number, Email,Catagory, URL
 	}
-	console.log(sendData);
+	console.log(sendData); 
+
 
 	console.log('inside go()');
 	fetch(API_URL+'/contacts/Add', {
@@ -234,14 +237,13 @@ const formData = new FormData(formElem);
         'content-type': 'application/json'
     }
 })
-.then(response => console.log(response))
+.then(response => response.json())
 .then(data=> console.log(data));
 console.log('after fetch...');
- //remove(id);
 }
 
-const  validate = (name, number, email, catagory) =>{
-	if(!name && !number && !email && !catagory)
+const  validate = (name, number, email, catagory, URL) =>{
+	if(!name && !number && !email && !catagory && !URL)
 	{
 		console.log('All fields must be entered');
 	}
