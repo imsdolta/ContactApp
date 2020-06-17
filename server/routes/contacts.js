@@ -5,15 +5,15 @@ const router = express.Router();
 const contacts = require('../Models/Phone')
 
 // /contacts route
-router.get('/', (req, res)=>{
-  res.json({
-    message:"This is contacts route"
-  })
-});
+// router.get('/', (req, res)=>{
+//   res.json({
+//     message:"This is contacts route"
+//   })
+// });
 
 
-// Add users to DB
-router.post('/Add',
+// Add users to DB    /contacts
+router.post('/',
   [
     check('Name').isLength({ min: 2 }).isLength({ max :20}),
     check('number').isLength({ max: 10 }).isNumeric(),
@@ -23,7 +23,7 @@ router.post('/Add',
   ],
   (req, res, next)=> { 
   
-    console.log(req.body);
+    console.log(req);
     const errors = validationResult(req);
     if (errors.isEmpty()) {
       let contact = new contacts({
@@ -53,7 +53,7 @@ router.post('/Add',
 
 
 //  /contacts/find route
-router.get('/find',function(req, res) {
+router.get('/',function(req, res) {
   contacts.find({}, function(err, contact) {
       if(err) return handleError(err);
       console.log(contact);
@@ -63,7 +63,7 @@ router.get('/find',function(req, res) {
   });
 });
 
-router.get('/find/:id',function(req, res) {
+router.get('/:id',function(req, res) {
  
   const _id = {_id : req.params.id};   // must be an object while using find
   contacts.find(_id, (err, contact)=> {
