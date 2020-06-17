@@ -20,7 +20,7 @@ formElem.addEventListener('submit', (event) => {        // Grab the form data an
  	}
  	console.log(sendData);
 
- 	fetch(API_URL+'/contacts/Add', {
+ 	fetch(API_URL+'/contacts', {
             method: 'POST',
             body: JSON.stringify(sendData),
             headers: {

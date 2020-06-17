@@ -7,7 +7,7 @@ const userCard = document.getElementById("userCard");
 const contact = document.getElementById("contact");
 
 window.addEventListener('load', ()=> {
-	getContacts(API_URL+'/contacts/find');
+	getContacts(API_URL+'/contacts');
 });
 
 
@@ -20,7 +20,7 @@ const getContacts = (url)=>{
 
 
 const Display = (data)=>{
-console.log(123);
+console.log(data);
 data.contact.forEach(item=>{
 		createDiv(item);       // create a div for each fetched item from db
 	})
@@ -61,7 +61,7 @@ const showCard = (id)=>{        // Expand to a bigger card when button is clicke
 
 	contactDiv.style.display = 'none';
 
-	fetch(API_URL+'/contacts/find/'+id)
+	fetch(API_URL+'/contacts/'+id)
 	.then(response=> response.json())
 	.then(data=>  card(data))
 	.catch(err=> console.log(err));
@@ -231,7 +231,7 @@ const saveNewData = () => {
 
 
 	console.log('inside go()');
-	fetch(API_URL+'/contacts/Add', {
+	fetch(API_URL+'/contacts', {
     method: 'POST',
     body: JSON.stringify(sendData),
     headers: {
