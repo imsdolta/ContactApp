@@ -4,13 +4,6 @@ const express = require('express');
 const router = express.Router();
 const contacts = require('../Models/Phone')
 
-// /contacts route
-// router.get('/', (req, res)=>{
-//   res.json({
-//     message:"This is contacts route"
-//   })
-// });
-
 
 // Add users to DB    /contacts
 router.post('/',
@@ -44,9 +37,9 @@ router.post('/',
       });
     
   
-  const extractedErrors = []
-  errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
-  return res.status(422).json({  errors: extractedErrors, })
+    const extractedErrors = []
+    errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
+    return res.status(422).json({  errors: extractedErrors, })
     }
 });
 
@@ -66,6 +59,7 @@ router.get('/',function(req, res) {
 router.get('/:id',function(req, res) {
  
   const _id = {_id : req.params.id};   // must be an object while using find
+
   contacts.find(_id, (err, contact)=> {
       if(err) return handleError(err);
       res.json({
@@ -76,7 +70,9 @@ router.get('/:id',function(req, res) {
 
 //  /contacts/delete/:id route
 router.get('/delete/:id', (req, res)=> {
+
   const id = {_id : req.params.id};
+  
   contacts.deleteOne(id, (err)=> {
   if (err) {
       return handleError(err);
