@@ -4,14 +4,15 @@ const errorElem = document.getElementById('error');
 const API_URL='http://localhost:3030';
 
 formElem.addEventListener('submit', (event) => {        // Grab the form data and make API req to save to db 
-	event.preventDefault();
+    event.preventDefault();
+    
     const formData = new FormData(formElem);
  	
  	var Name = formData.get('name');
  	var number = formData.get('number');
  	var Email = formData.get('email');
-     var Catagory = formData.get('catagory');
-     var URL = formData.get('URL');
+    var Catagory = formData.get('catagory');
+    var URL = formData.get('URL');
 	
  	validate(Name,number,Email,Catagory,URL);     // Client side form validation 
 
@@ -33,16 +34,14 @@ formElem.addEventListener('submit', (event) => {        // Grab the form data an
 
 
 const  validate = (name, number, email, catagory,URL) =>{
-while (errorElem.lastChild) 				
-    errorElem.removeChild(errorElem.lastChild);
-if(!name && !number && !email && !catagory)
-{
-    CreateMessageDiv("Do not leave fields empty");
-}
-else {
-    
-    CreateMessageDiv("Success");	
-}	 
+    while (errorElem.lastChild) 				
+        errorElem.removeChild(errorElem.lastChild);
+
+    if(!name && !number && !email && !catagory) {
+        CreateMessageDiv("Do not leave fields empty");
+    } else {
+        CreateMessageDiv("Success");	
+    }	 
 }
 
 const CreateMessageDiv = (message)=>{

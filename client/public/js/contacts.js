@@ -20,8 +20,8 @@ const getContacts = (url)=>{
 
 
 const Display = (data)=>{
-console.log(data);
-data.contact.forEach(item=>{
+	console.log(data);
+	data.contact.forEach(item=> {
 		createDiv(item);       // create a div for each fetched item from db
 	})
 }
@@ -120,8 +120,7 @@ const card = (data)=>
 	userCard.appendChild(div1);
 }
 
-const remove = (id) =>             // delete a contact
-{
+const remove = (id) => {            // delete a contact
 	fetch(API_URL+'/contacts/delete/'+id)
 	.then(response=> {
 		if(response.status == 200)
@@ -141,7 +140,7 @@ const remove = (id) =>             // delete a contact
 	.then(data=> console.log(data));
 }
 
-const edit = (id)=>{                     // Edit info of a contact
+const edit = (id)=> {                     // Edit info of a contact
 	 userCard.style.display='none';
 	 fetch(API_URL+'/contacts/edit/'+id)
 	.then(response=> response.json())
@@ -244,11 +243,9 @@ console.log('after fetch...');
 }
 
 const  validate = (name, number, email, catagory, URL) =>{
-	if(!name && !number && !email && !catagory && !URL)
-	{
+	if(!name && !number && !email && !catagory && !URL) {
 		console.log('All fields must be entered');
-	}
-	else {
+	} else {
 		alert("success");
 	}	 
 }
