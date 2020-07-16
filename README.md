@@ -12,6 +12,7 @@ LIVE DEMO  [Contact App](https://node-contact-client.herokuapp.com/)
 - ### Express
 - ### Bulma [bulma](bulma.io)
 
+---
 
 # 📂 What's inside?
 
