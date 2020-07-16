@@ -1,7 +1,7 @@
 
 const formElem = document.getElementById('contact-form');
 const errorElem = document.getElementById('error');
-const API_URL='http://localhost:3030';
+const API_URL='https://node-contact-app-server.herokuapp.com';
 
 formElem.addEventListener('submit', (event) => {        // Grab the form data and make API req to save to db 
     event.preventDefault();
@@ -23,6 +23,7 @@ formElem.addEventListener('submit', (event) => {        // Grab the form data an
 
  	fetch(API_URL+'/contacts', {
             method: 'POST',
+            mode:'cors',
             body: JSON.stringify(sendData),
             headers: {
                 'content-type': 'application/json'

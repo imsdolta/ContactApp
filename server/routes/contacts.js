@@ -30,7 +30,7 @@ router.post('/',
       console.log('before saving ',contact);
 
       contact.save((err)=>{
-          if(err) next();
+          if(err) next(err);
           else{
             res.status(200);
           }
@@ -45,10 +45,10 @@ router.post('/',
 
 
 
-//  /contacts/find route
-router.get('/',function(req, res) {
+//  /contacts/p route
+router.get('/',function(req, res, next) {
   contacts.find({}, function(err, contact) {
-      if(err) return handleError(err);
+      if(err) next(err);
       console.log(contact);
       res.json({
         contact
@@ -56,26 +56,30 @@ router.get('/',function(req, res) {
   });
 });
 
-router.get('/:id',function(req, res) {
+router.get('/:id',function(req, res, next) {
  
   const _id = {_id : req.params.id};   // must be an object while using find
 
   contacts.find(_id, (err, contact)=> {
-      if(err) return handleError(err);
-      res.json({
-        contact
-      })
+      if(err) {
+        next(err);
+      } else {
+          res.json({
+          contact
+        })
+      }
+      
   });
 });
 
 //  /contacts/delete/:id route
-router.get('/delete/:id', (req, res)=> {
+router.get('/delete/:id', (req, res, next)=> {
 
   const id = {_id : req.params.id};
   
   contacts.deleteOne(id, (err)=> {
   if (err) {
-      return handleError(err);
+      next(err);
   } else {  
    res.json({ message :"Contact Deleted"});
   }
@@ -85,17 +89,17 @@ router.get('/delete/:id', (req, res)=> {
  
 
 //  /contacts/edit/:id route
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', (req, res, next) => {
   let id = {_id : req.params.id};
   contacts.findById(id, (err, contact)=> {
     console.log(contact);
     if(err) {
       res.json({"error":"not found"});
-      handleError(err);
+        next(err);
     } else {
       contacts.deleteOne(id, (err)=> {
         if (err) {
-            return handleError(err);
+            next(err);
         } else {  
             res.json(contact);
         }
@@ -106,12 +110,14 @@ router.get('/edit/:id', (req, res) => {
 
 
 //handle error
-const handleError = (err, req, res, next) => {
-  if (res.headersSent) {
-    return next(err)
+router.use((err, req, res, next)=> {
+  res.status(err.status|| 500).send(
+  {
+      "error name":err.name,
+      "Message":err.message
   }
-  res.status(500).send('error', error);
-}
+    );
+})
 
 
 module.exports = router;

@@ -1,6 +1,11 @@
 # Contact App
 
 A Contact App which allows operations such as addition, removal , edition of contacts.
+
+DEMO  [Contact App](https://node-contact-client.herokuapp.com/) 
+---
+
+
 ## Tech 
 - ### node.js
 - ### (MongoDB) mongoose 
@@ -36,7 +41,7 @@ cd server
 npm install 
 node App.js
 ```
-todos:
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const app = express();
-const port = 3030
+const port = process.env.PORT || 1337
 
 
 app.use(morgan('tiny'));
@@ -44,30 +44,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-// Express Session Middleware
-// app.use(
-//   session({
-//     secret: 'keyboard cat',
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );  
-
-// Express Messages Middleware
-// app.use(require('connect-flash')());
-// app.use(function(req, res, next) {
-//   res.locals.messages = require('express-messages')(req, res);
-//   next();
-// });
-
-
-// app.get('/*', function(req, res, next) {
-//   setTimeout(function() {
-//     req.session.flash = [];
-//   }, 3000);
-//   next();
-// });
-
 app.get('/',(req, res)=>{
   res.json({
     message:"At home route"
@@ -75,7 +51,7 @@ app.get('/',(req, res)=>{
 })
 
 
-app.use('/contacts/',contact)
+app.use('/contacts',contact)
 app.listen(port);
 
 

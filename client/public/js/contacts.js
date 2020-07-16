@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3030';
+const API_URL = 'https://node-contact-app-server.herokuapp.com';
 
 // select elements 
 const contactDiv = document.getElementById("contacts");
@@ -12,7 +12,10 @@ window.addEventListener('load', ()=> {
 
 
 const getContacts = (url)=>{
-	fetch(url)
+	fetch(url,{
+		mode :'cors',
+		'Access-Control-Allow-Origin':'*'
+	})
 	.then(response=> response.json())
 	.then(data=>  Display(data))
 	.catch(err=> console.log(err));
@@ -61,7 +64,10 @@ const showCard = (id)=>{        // Expand to a bigger card when button is clicke
 
 	contactDiv.style.display = 'none';
 
-	fetch(API_URL+'/contacts/'+id)
+	fetch(API_URL+'/contacts/'+id,{
+		mode :'cors',
+		'Access-Control-Allow-Origin':'*'
+	})
 	.then(response=> response.json())
 	.then(data=>  card(data))
 	.catch(err=> console.log(err));
@@ -121,7 +127,10 @@ const card = (data)=>
 }
 
 const remove = (id) => {            // delete a contact
-	fetch(API_URL+'/contacts/delete/'+id)
+	fetch(API_URL+'/contacts/delete/'+id,{
+		mode :'cors',
+		'Access-Control-Allow-Origin':'*'
+	})
 	.then(response=> {
 		if(response.status == 200)
 		userCard.style.display = 'none';
@@ -142,7 +151,10 @@ const remove = (id) => {            // delete a contact
 
 const edit = (id)=> {                     // Edit info of a contact
 	 userCard.style.display='none';
-	 fetch(API_URL+'/contacts/edit/'+id)
+	 fetch(API_URL+'/contacts/edit/'+id,{
+		mode :'cors',
+		'Access-Control-Allow-Origin':'*'
+	})
 	.then(response=> response.json())
 	.then(data=> change(data));
 
@@ -231,7 +243,7 @@ const saveNewData = () => {
 
 	console.log('inside go()');
 	fetch(API_URL+'/contacts', {
-    method: 'POST',
+	method: 'POST',
     body: JSON.stringify(sendData),
     headers: {
         'content-type': 'application/json'
