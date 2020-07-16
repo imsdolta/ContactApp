@@ -2,7 +2,7 @@
 
 A Contact App which allows operations such as addition, removal , edition of contacts.
 
-DEMO  [Contact App](https://node-contact-client.herokuapp.com/) 
+LIVE DEMO  [Contact App](https://node-contact-client.herokuapp.com/) 
 ---
 
 
@@ -12,6 +12,30 @@ DEMO  [Contact App](https://node-contact-client.herokuapp.com/)
 - ### Express
 - ### Bulma [bulma](bulma.io)
 
+
+# 📂 What's inside?
+
+```
+
+Contact-App
+    |
+    |──Client
+    |    |── public
+    │    ├── icons
+    │    └── js
+    |
+    ├── server
+    │    ├─── Models
+    │    │─── node_modules
+    │    ├─── routes
+    |    |── .env
+    │    └─── app.js
+    |
+    |
+    └── README.md
+
+```
+---
 
 ## Installation
 
