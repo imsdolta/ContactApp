@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-	<section class="hero is-primary">
-	  <div class="hero-body">
+	<section class="hero is-dark">
+	  <div class="hero-body ">
 	    <div class="container">
 	    	<div class="level">
 	    		<div class="level-left">
@@ -25,69 +25,74 @@
 
 	<br><br>
 
-	<div class="container">
-		<a class="button is-link is-rounded is-fullwidth " href="contacts.html">Show All Contacts</a>
+	<div class="container px-4">
+		<a class="button is-link is-rounded is-fullwidth  " href="contacts.html">Show All Contacts</a>
 	</div>
 
  	<div id="error"> </div>
 	<div class="container is-fluid">
 	<br><br>
-<form class="contact-form" id="contact-form"> 
-	<div class="field">
-	  <label class="label">Name</label>
-	  <div class="control">
-	    <input class="input" type="text" name="name" placeholder="Enter Name here">
-	  </div>
+	<div class="card mx-6 ">
+
+		<form class="contact-form " id="contact-form"> 
+			<div class="field">
+			  <label class="label">Name</label>
+			  <div class="control">
+				<input class="input is-success" type="text" name="name" placeholder="Enter Name here">
+			  </div>
+			</div>
+		
+			<div class="field">
+			  <label class="label">Contact Number</label>
+			  <div class="control has-icons-left has-icons-right">
+				<input class="input is-success" type="text"name="number" placeholder="Enter contact Number" >
+				<span class="icon is-small is-left">
+				  <i class="fas fa-user"></i>
+				</span>
+			  </div>
+			</div>
+		
+			<div class="field">
+			  <label class="label">Email</label>
+			  <div class="control has-icons-left has-icons-right">
+				<input class="input is-success" type="email" name="email" placeholder="Email input">
+				<span class="icon is-small is-left">
+				  <i class="fas fa-envelope"></i>
+				</span>
+			  </div>
+			</div>
+		
+			<div class="field">
+				<label class="label">Image URL</label>
+				  <input class="input is-success" type="URL" name="URL" placeholder="Enter URL">
+			</div>
+		
+			<div class="field">	
+			  <label class="label" >Category</label>
+			  <div class="control">
+				<div class="select">
+				  <select name="catagory">
+					  <option> Personal</option>
+					<option>friend</option>
+					<option>family</option>
+					<option>Work</option>
+					<option>Other</option>
+				  </select>
+				</div>
+			  </div>
+			</div>
+		
+			<div class="field is-grouped">
+			  <div class="control">
+				<button class="button is-link" typr="submit">Submit</button>
+			  </div>
+			</div>
+			</form>
+
 	</div>
 
-	<div class="field">
-	  <label class="label">Contact Number</label>
-	  <div class="control has-icons-left has-icons-right">
-	    <input class="input is-success" type="text"name="number" placeholder="Enter contact Number" >
-	    <span class="icon is-small is-left">
-	      <i class="fas fa-user"></i>
-	    </span>
-	  </div>
 	</div>
-
-	<div class="field">
-	  <label class="label">Email</label>
-	  <div class="control has-icons-left has-icons-right">
-	    <input class="input is-success" type="email" name="email" placeholder="Email input">
-	    <span class="icon is-small is-left">
-	      <i class="fas fa-envelope"></i>
-	    </span>
-	  </div>
-	</div>
-
-	<div class="field">
-		<label class="label">Image URL</label>
-		  <input class="input is-success" type="URL" name="URL" placeholder="Enter URL">
-	</div>
-
-	<div class="field">	
-	  <label class="label" >Category</label>
-	  <div class="control">
-	    <div class="select">
-	      <select name="catagory">
-	      	<option> Personal</option>
-	        <option>friend</option>
-	        <option>family</option>
-	        <option>Work</option>
-	        <option>Other</option>
-	      </select>
-	    </div>
-	  </div>
-	</div>
-
-	<div class="field is-grouped">
-	  <div class="control">
-	    <button class="button is-link" typr="submit">Submit</button>
-	  </div>
-	</div>
-	</form>
-	</div>
-<footer class="footer">
+<footer class="footer is-dark">
   <div class="content has-text-centered">
     <p>
       <strong>Contacts App</strong> by <a href="https://github.com/imsdolta">Sachin Dolta </a>.
