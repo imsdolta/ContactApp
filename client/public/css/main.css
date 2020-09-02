@@ -1,5 +1,22 @@
-#back{
-	padding: 20px;
-	align-content: center;
-	margin: 10px;
+#back {
+    padding: 20px;
+    align-content: center;
+    margin: 10px;
+}
+
+a.button.is-link.is-rounded.is-fullwidth {
+    width: -webkit-fill-available;
+    align-items: center;
+    align-content: center;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.contact-form {
+    padding: 1rem;
+}
+
+div {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
